@@ -1,0 +1,23 @@
+.collapse ul li a{
+    margin:0px 10px;
+}
+.search{
+    
+    margin-bottom: 20px;
+}
+.active{
+    background-color: #EEEEEE;
+    color:black;
+}
+.mr{
+    margin-top:20px;
+}
+.card-footer a i{
+    margin:0px 15px;
+    font-size:20px;
+    border-radius:18px;
+    border:2px solid #FF6600;
+    height:36px;
+    width:36px;
+    padding-top:5px;
+}
