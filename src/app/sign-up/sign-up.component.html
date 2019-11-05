@@ -43,39 +43,120 @@
                   <div class="card-header">
                      Dang ki thanh vien cua chung toi <i class='far fa-hand-point-down'></i>
                   </div>
-                  <div class="card-body">
+                  <div class="card-body" *ngIf="!login">
                     <!--Trang lien he--> 
-                    <form>
+                    <form (ngSubmit)="onSubmit(formSignup)" #formSignup="ngForm">
+                      <div class="form-group">
+                        <label for="formGroupExampleInput">UserName:</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nhap username" ngModel #txtUsername="ngModel" name="username" required><br>
+                        <p *ngIf="txtUsername.touched && txtUsername.errors?.required">Khong dc de trong ki tu</p>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password:</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Nhap Password" ngModel #txtPassword="ngModel" name="password" required minlength="6"><br>
+                        <p *ngIf="txtPassword.touched && txtPassword.errors?.required">Khong dc de trong ki tu</p>
+                        <p *ngIf="txtPassword.touched && txtPassword.errors?.minlength">Ban can phai nhap it nhat 6 ki tu</p>
+                      </div>
+                      <div class="form-group">
+                        <label for="formGroupExampleInput">FullName:</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nhap ten day du" ngModel #txtFullname="ngModel" name="fullname" required><br>
+                        <p *ngIf="txtFullname.touched && txtFullname.errors?.required">Khong dc de trong ki tu</p>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email:</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhap email" ngModel #txtEmail="ngModel" name="email" required email><br>
+                        <p *ngIf="txtEmail.touched && txtEmail.errors?.required">Khong dc de trong ki tu</p>
+                        <p *ngIf="txtEmail.touched && txtEmail.errors?.email">Email cua ban sai dinh dang</p>
+                      </div>
+                      <fieldset class="form-group">
                         <div class="row">
-                            <div class="col">
-                            <input type="text" class="form-control" placeholder="First name">
-                            </div>
-                            <div class="col">
-                            <input type="text" class="form-control" placeholder="Last name">
-                            </div>
+                          <legend class="col-form-label col-sm-2 pt-0">Gender: </legend>
+                          <div class="col-sm-10" ngModelGroup="gender">
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" id="gridRadios1" [ngModel]="false" value="Nam" name="gender">
+                            <label class="form-check-label" for="gridRadios1">
+                              Nam
+                            </label>
+                          </div>
+                            <div class="form-check">
+                            <input class="form-check-input" type="radio" id="gridRadios2" [ngModel]="false" value="Nu" name="gender">
+                            <label class="form-check-label" for="gridRadios2">
+                              Nu
+                            </label>
+                          </div>
+                          </div>
+                          </div>
+                      </fieldset>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Birthday:</label>
+                        <div class="form-row">
+                          <div class="col-md-4 mb-3">
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" ngModel name="ngay">
+                              <option selected>Date</option>
+                              <option *ngFor='let p of date' [value]="p">{{p}}</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" ngModel name="thang">
+                              <option selected>Month</option>
+                              <option *ngFor='let p of month' [value]="p">{{p}}</option>
+                            </select>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" ngModel name="nam">
+                              <option selected>Year</option>
+                              <option *ngFor='let p of year' [value]="p">{{p}}</option>
+                            </select>
+                          </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputPassword4">Password</label>
-                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="inputPassword4">Re-Password</label>
-                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                      </div>
+                        <button [disabled]="formSignup.invalid" type="submit" class="btn btn-primary">Sign Up</button>
                     </form>
                   </div>
+                <!--Dang ki thanh cong-->
+                <div class="card-body" *ngIf="login">
+                  <h3 style="color:aqua">Chuc mung ban da dang ki thanh cong</h3>
+                  <button type="submit" class="btn btn-primary" (click)="Login()">Tro ve trang dang ki</button><br><br>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col" colspan="2">Thong tin dang ki nhu sau:</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">UserName:</th>
+                        <td>{{list.username}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Password: </th>
+                        <td>{{list.password}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Fullname: </th>
+                        <td>{{list.fullname}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Email: </th>
+                        <td>{{list.email}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Gender: </th>
+                        <td>{{list.gender}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Birthday: </th>
+                        <td>{{list.birthday}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
           <!--Phan trang di chuyen cho web-->
                <div class="card-footer text-center">
-                  <a href="#"><i class='far fa-hand-point-up'></i></a>
-                  <a href="#"><i class='far fa-hand-point-left'></i></a>
-                  <a href="#"><i class='far fa-hand-point-right'></i></a>
-                  <a href="#"><i class='far fa-hand-point-down'></i></a>
+                <a><i class='far fa-hand-point-up'></i></a>
+                <a><i class='far fa-hand-point-left'></i></a>
+                <a><i class='far fa-hand-point-right'></i></a>
+                <a><i class='far fa-hand-point-down'></i></a>
                </div>
             </div>
             <div class="jumbotron jumbotron-fluid mr">

@@ -20,15 +20,7 @@
         <div class="catelogy">
           <ul class="list-group">
               <li class="list-group-item active">Danh muc mon hoc</li>
-              <li class="list-group-item">Xay dung trang web</li>
-              <li class="list-group-item">SQL Sever</li>
-              <li class="list-group-item"> Co so du lieu</li>
-              <li class="list-group-item">Lap trinh huong doi tuong java</li>
-              <li class="list-group-item">Lap trinh game</li>
-              <li class="list-group-item">Lap trinh PHP</li>
-              <li class="list-group-item">Lap trinh android</li>
-              <li class="list-group-item">Lap trinh ASP.NET</li>
-              <li class="list-group-item">Thiet ke do hoa</li>
+              <li (click)="Load()" class="list-group-item" *ngFor='let p of list'><a>{{p.Name}}</a></li> 
           </ul>
        </div>
        <div class="gif mr">
@@ -41,26 +33,39 @@
         <article class ="col-lg-9 col-sm-8">
               <div class="card">
                   <div class="card-header">
-                      Xay dung trang web <i class='far fa-hand-point-down'></i>
+                      <span>Xin chao : {{user.username}}                 </span><br>
+                      {{pName}} <i class='far fa-hand-point-down'></i>
                   </div>
-                  <div class="card-body">
-                      <p>1.Co may loai sever?</p>
+                  <div class="card-body" *ngIf="login">
+                    <div class="question" *ngFor='let q of question | paginate: { itemsPerPage: CountPage, currentPage: Page}'>
+                      <p>Cau {{Page}}:  {{q.Text}}</p>
                       <hr>
-                      <input type="radio" name="test" value="Doi xung">  Doi xung<br><br>
-                      <input type="radio" name="test" value="Be van ban">  Be van ban<br><br>
-                      <input type="radio" name="test" value="Khoi van ban">  Khoi van ban<br><br>
-                      <input type="radio" name="test" value="Khong doi xung">  Khong doi xung<br><br>
+                      <div>
+                      <input type="radio" name="test" [value]="q.Answers[0].Id" [(ngModel)]="answer" [ngModelOptions]="{standalone:true}">  {{q.Answers[0].Text}}<br><br>
+                      <input type="radio" name="test" [value]="q.Answers[1].Id" [(ngModel)]="answer" [ngModelOptions]="{standalone:true}">  {{q.Answers[1].Text}}<br><br>
+                      <input type="radio" name="test" [value]="q.Answers[2].Id" [(ngModel)]="answer" [ngModelOptions]="{standalone:true}">  {{q.Answers[2].Text}}<br><br>
+                      <input type="radio" name="test" [value]="q.Answers[3].Id" [(ngModel)]="answer" [ngModelOptions]="{standalone:true}">  {{q.Answers[3].Text}}<br><br>
+                      </div>
+                      <hr>
+                      <button type="submit" class="btn btn-outline-primary text-center" (click)="Mark(q.AnswerId)" *ngIf="isShow">Click to Answer !</button>
+                      <button type="submit" class="btn btn-outline-primary text-center disabled" *ngIf="!isShow">Ban da tra loi cau nay roi</button><br><br>
                       <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Diem cua ban</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                          </div>
+                        <label for="exampleFormControlTextarea1">Diem cua ban</label>
+                        <textarea class="form-control text-muted" id="exampleFormControlTextarea1" rows="3">Mark: {{mark}}        
+Ban da dung : {{mark}}/{{Quizslength}} cau hoi</textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body" *ngIf="!login">
+                    <h3 style="color:red;">Vui long dang nhap truoc khi thi</h3>
+                    <p style="color:red;">Luu y danh muc chi de tham khao neu muon thi cac mon khac quay lai nut home va chon lai bieu tuong cau mon hoc do </p>
                   </div>
           <!--Phan trang di chuyen cho web-->
                <div class="card-footer text-center">
-                  <a href="#"><i class='far fa-hand-point-up'></i></a>
-                  <a href="#"><i class='far fa-hand-point-left'></i></a>
-                  <a href="#"><i class='far fa-hand-point-right'></i></a>
-                  <a href="#"><i class='far fa-hand-point-down'></i></a>
+                  <a><i class='far fa-hand-point-up'></i></a>
+                  <a (click)="prepageQuestion()"><i class='far fa-hand-point-left'></i></a>
+                  <a (click)="nextpageQuestion()"><i class='far fa-hand-point-right'></i></a>
+                  <a><i class='far fa-hand-point-down'></i></a>
                </div>
             </div>
             <div class="jumbotron jumbotron-fluid mr">

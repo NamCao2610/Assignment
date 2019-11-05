@@ -22,15 +22,7 @@
   <div class="catelogy">
     <ul class="list-group">
         <li class="list-group-item active">Danh muc mon hoc</li>
-        <li class="list-group-item">Xay dung trang web</li>
-        <li class="list-group-item">SQL Sever</li>
-        <li class="list-group-item"> Co so du lieu</li>
-        <li class="list-group-item">Lap trinh huong doi tuong java</li>
-        <li class="list-group-item">Lap trinh game</li>
-        <li class="list-group-item">Lap trinh PHP</li>
-        <li class="list-group-item">Lap trinh android</li>
-        <li class="list-group-item">Lap trinh ASP.NET</li>
-        <li class="list-group-item">Thiet ke do hoa</li>
+        <li class="list-group-item" *ngFor='let p of list'><a [routerLink]="['/home',p.Id]">{{p.Name}}</a></li>
     </ul>
  </div>
  <div class="gif mr">
@@ -46,100 +38,41 @@
                 Test cac bai trac nghiem o phan ben duoi <i class='far fa-hand-point-down'></i>
             </div>
             <div class="card-body">
+
                 <div class="row">
-                    <div class="col-lg-4 col-sm-4">
+                    <div class="col-lg-4 col-sm-4 mr" *ngFor='let p of list | paginate: { itemsPerPage: CountPage, currentPage: Page }'>
                         <div class="card text-center">
                             <div class="card-header text-muted">
-                                Xay dung trang web
+                                {{p.Name}}
                             </div>
                             <div class="card-body">
-                                <img src="assets/logos/WEBU.jpg">
+                                <img src="assets/logos/{{p.Logo}}">
                             </div>
                             <div class="card-footer">
-                                <a [routerLink]="['/home/question']">Test question</a>
+                                <a [routerLink]="['/home',p.Id]">Test question</a>
                             </div>
                         </div> 
                     </div>
-
-                    <div class="col-lg-4 col-sm-4">
-                        <div class="card text-center">
-                            <div class="card-header text-muted">
-                                SQL Sever
-                            </div>
-                            <div class="card-body">
-                                <img src="assets/logos/DBBS.png">
-                            </div>
-                            <div class="card-footer">
-                                <a [routerLink]="['/home/question']">Test question</a>
-                            </div>
-                        </div> 
-                    </div>
-
-                    <div class="col-lg-4 col-sm-4">
-                        <div class="card text-center">
-                            <div class="card-header text-muted">
-                                Co so du lieu
-                            </div>
-                            <div class="card-body">
-                                <img src="assets/logos/DBAV.png">
-                            </div>
-                            <div class="card-footer">
-                                <a [routerLink]="['/home/question']">Test question</a>
-                            </div>
-                        </div> 
-                    </div>
-
-                    <div class="col-lg-4 col-sm-4 mr">
-                        <div class="card text-center">
-                            <div class="card-header text-muted">
-                                Lap trinh huong doi tuong 
-                            </div>
-                            <div class="card-body">
-                                <img src="assets/logos/JAAV.png">
-                            </div>
-                            <div class="card-footer">
-                                <a [routerLink]="['/home/question']">Test question</a>
-                            </div>
-                        </div> 
-                    </div>
-
-                    <div class="col-lg-4 col-sm-4 mr">
-                        <div class="card text-center">
-                            <div class="card-header text-muted">
-                                Lap Trinh Game
-                            </div>
-                            <div class="card-body">
-                                <img src="assets/logos/GAME.png">
-                            </div>
-                            <div class="card-footer">
-                                <a [routerLink]="['/home/question']">Test question</a>
-                            </div>
-                        </div> 
-                    </div>
-
-                    <div class="col-lg-4 col-sm-4 mr">
-                        <div class="card text-center">
-                            <div class="card-header text-muted">
-                                Lap trinh PHP
-                            </div>
-                            <div class="card-body">
-                                <img src="assets/logos/PHPP.png">
-                            </div>
-                            <div class="card-footer">
-                                <a [routerLink]="['/home',question]">Test question</a>
-                            </div>
-                        </div> 
-                    </div>
-
                 </div>
+                
             </div>
     <!--Phan trang di chuyen cho web-->
          <div class="card-footer text-center">
-            <a href="#"><i class='far fa-hand-point-up'></i></a>
-            <a href="#"><i class='far fa-hand-point-left'></i></a>
-            <a href="#"><i class='far fa-hand-point-right'></i></a>
-            <a href="#"><i class='far fa-hand-point-down'></i></a>
+            <a><i class='far fa-hand-point-up'></i></a>
+            <a (click)="prepage()"><i class='far fa-hand-point-left'></i></a>
+            <a (click)="nextpage()"><i class='far fa-hand-point-right'></i></a>
+            <a><i class='far fa-hand-point-down'></i></a>
          </div>
       </div>
+
+       <!--Khoa hoc lap trinh web-->
+       <div class="jumbotron mr">
+        <h1 class="display-4">Hello, Guy!</h1>
+        <p class="lead">Day la khoa hoc lap trinh web voi angular</p>
+        <hr class="my-4">
+        <p>Ban se su dung framework cua angular de tao ra nhung trang web co do phan hoi thich hop nhat tao cam giac than thien voi nguoi dung</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Chi tiet</a>
+       </div>
+
   </article>
 </div>

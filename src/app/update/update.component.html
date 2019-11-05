@@ -1,0 +1,103 @@
+<div class="row mr">
+        <aside class="col-lg-3 col-sm-4">
+          <!--Thanh tim kiem mon hoc-->
+          <div class="search">
+            <div class="card">
+              <div class="card-header">
+                   Tim kiem mon hoc
+              </div>
+              <div class="card-body">
+                  <div class="input-group">
+                      <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Search" aria-describedby="inputGroupPrepend2" required>
+                      <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupPrepend2"><a href="#"><i class="fas fa-search"></i></a></span>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        <!--List group cac mpon hoc-->
+        <div class="catelogy">
+          <ul class="list-group">
+              <li class="list-group-item active">Danh muc mon hoc</li>
+              <li class="list-group-item">Xay dung trang web</li>
+              <li class="list-group-item">SQL Sever</li>
+              <li class="list-group-item"> Co so du lieu</li>
+              <li class="list-group-item">Lap trinh huong doi tuong java</li>
+              <li class="list-group-item">Lap trinh game</li>
+              <li class="list-group-item">Lap trinh PHP</li>
+              <li class="list-group-item">Lap trinh android</li>
+              <li class="list-group-item">Lap trinh ASP.NET</li>
+              <li class="list-group-item">Thiet ke do hoa</li>
+          </ul>
+       </div>
+       <div class="gif mr">
+           <div class="card" style="height:125px;">
+             <img src ="assets/meo.gif">
+          </div>
+       </div>
+        </aside>
+        <!--Phan article-->
+        <article class ="col-lg-9 col-sm-8">
+              <div class="card">
+                  <div class="card-header">
+                     Thong tin cua ban nhu sau <i class='far fa-hand-point-down'></i>
+                  </div>
+                  <div class="card-body" *ngIf="!login">
+                    <!--Trang lien he--> 
+                    <h3 style="color:red;">Vui long dang nhap truoc khi xem thong tin</h3>
+                  </div>
+                <!--Dang ki thanh cong-->
+                <div class="card-body" *ngIf="login">
+                  
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col" colspan="2">Thong tin cua ban nhu sau:</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">UserName:</th>
+                        <td>{{liststudent.username}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Password: </th>
+                        <td>{{liststudent.password}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Fullname: </th>
+                        <td>{{liststudent.fullname}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Email: </th>
+                        <td>{{liststudent.email}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Gender: </th>
+                        <td>{{liststudent.gender}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Birthday: </th>
+                        <td>{{liststudent.birthday}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+          <!--Phan trang di chuyen cho web-->
+               <div class="card-footer text-center">
+                <a><i class='far fa-hand-point-up'></i></a>
+                <a><i class='far fa-hand-point-left'></i></a>
+                <a><i class='far fa-hand-point-right'></i></a>
+                <a><i class='far fa-hand-point-down'></i></a>
+               </div>
+            </div>
+            <div class="jumbotron jumbotron-fluid mr">
+                    <div class="container">
+                      <h4 class="display-5">Khoa Hoc Lap Trinh Web 90 Ngay tai day</h4>
+                      <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                    </div>
+            </div>
+        </article>
+      </div>
+

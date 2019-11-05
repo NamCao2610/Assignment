@@ -43,28 +43,38 @@
                   <div class="card-header">
                      Dang nhap vao web nha <i class='far fa-hand-point-down'></i>
                   </div>
-                  <div class="card-body">
+                  <div class="card-body" *ngIf="!login">
                     <!--Trang lien he--> 
-                    <form>
-                       
+                    <form (ngSubmit)="onSubmit();" [formGroup]="formSignIn">
                         <div class="form-group col-md-6">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                            <label for="inputEmail4">UserName : </label>
+                            <input type="text" class="form-control" id="inputEmail4" placeholder="UserName" formControlName="username"><br>
+                            <p *ngIf="formSignIn.get('username').errors?.required && formSignIn.get('username').touched">Ko dc de trong ki tu</p>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="inputPassword4">Password</label>
-                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                            <label for="inputPassword4">Password :</label>
+                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password" formControlName="password"><br>
+                            <p *ngIf="formSignIn.get('password').errors?.required && formSignIn.get('password').touched">Ko dc de trong ki tu</p>
+                            <p *ngIf="formSignIn.get('password').errors?.minlength && formSignIn.get('password').touched">Mat khau phai it nhat 6 ki tu</p>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Sign In</button>
-                    </form>
+                        <button [disabled]="formSignIn.invalid" type="submit" class="btn btn-primary">Sign In</button>
+                    </form><br>
+                    <p>Vui long dang ki truoc khi dang nhap hehe</p>
+                    <p>Sau khi doi mat khau co the dang nhap lai</p>
+                    <p>Sau khi quen mat khau co the dang nhap lai</p>
+                  </div>
+          <!--Dang nhap thanh cong-->
+                  <div class="card-body" *ngIf="login">
+                    <h3 style="color:green;">Chuc mung ban da dang nhap thanh cong</h3>
+                    <button type="submit" class="btn btn-primary" (click)="Login()">Tro ve trang dang nhap</button>
                   </div>
           <!--Phan trang di chuyen cho web-->
                <div class="card-footer text-center">
-                  <a href="#"><i class='far fa-hand-point-up'></i></a>
-                  <a href="#"><i class='far fa-hand-point-left'></i></a>
-                  <a href="#"><i class='far fa-hand-point-right'></i></a>
-                  <a href="#"><i class='far fa-hand-point-down'></i></a>
+                <a><i class='far fa-hand-point-up'></i></a>
+                <a><i class='far fa-hand-point-left'></i></a>
+                <a><i class='far fa-hand-point-right'></i></a>
+                <a><i class='far fa-hand-point-down'></i></a>
                </div>
             </div>
             <div class="jumbotron jumbotron-fluid mr">

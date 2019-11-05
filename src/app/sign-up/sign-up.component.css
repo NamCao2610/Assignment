@@ -18,3 +18,10 @@
     width:36px;
     padding-top:5px;
 }
+input.ng-invalid.ng-touched{
+    border: 2px solid red;
+}
+p{
+    color:red;
+    font-size:12px;
+}
