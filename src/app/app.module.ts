@@ -4,6 +4,10 @@ import {RouterModule} from '@angular/router';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule} from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -16,6 +20,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { QuizService } from './quiz.service';
 import {DataService} from './data.service';
+import {FirebaseService} from './firebase.service';
 import { LogOutComponent } from './log-out/log-out.component';
 import { ChangePassComponent } from './change-pass/change-pass.component';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
@@ -59,9 +64,12 @@ import { UpdateComponent } from './update/update.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
     AppRoutingModule
   ],
-  providers: [QuizService,DataService],
+  providers: [QuizService,DataService,FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

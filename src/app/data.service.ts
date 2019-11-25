@@ -4,18 +4,20 @@ import { Student } from './Students';
 
 @Injectable()
 
-export class DataService {
+export class DataService implements OnInit{
  ListStudents: Student[];
  infor:Student;
  datalogin:boolean;
     constructor(private http: HttpClient)
     {
-    
+       
     }
-
+ngOnInit(){
+    
+}
 getStudent()
 {
-    const url2 ='./assets/TaiNguyen/db/Students.js';
+    const url2 ='./assets/TaiNguyen/db/Students.json';
     return this.http.get<Student[]>(url2);
 }
 

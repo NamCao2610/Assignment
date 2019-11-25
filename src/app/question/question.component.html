@@ -20,7 +20,7 @@
         <div class="catelogy">
           <ul class="list-group">
               <li class="list-group-item active">Danh muc mon hoc</li>
-              <li (click)="Load()" class="list-group-item" *ngFor='let p of list'><a>{{p.Name}}</a></li> 
+              <li  class="list-group-item" *ngFor='let p of list'><a>{{p.Name}}</a></li> 
           </ul>
        </div>
        <div class="gif mr">
@@ -58,7 +58,7 @@ Ban da dung : {{mark}}/{{Quizslength}} cau hoi</textarea>
                   </div>
                   <div class="card-body" *ngIf="!login">
                     <h3 style="color:red;">Vui long dang nhap truoc khi thi</h3>
-                    <p style="color:red;">Luu y danh muc chi de tham khao neu muon thi cac mon khac quay lai nut home va chon lai bieu tuong cau mon hoc do </p>
+                    <p style="color:red;">Lưu ý danh muc chỉ để tham khảo để chọn môn khác vui lòng chọn home và chọn môn mới ở danh mục hoặc biểu tượng chỉ định môn học đó </p>
                   </div>
           <!--Phan trang di chuyen cho web-->
                <div class="card-footer text-center">

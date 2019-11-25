@@ -3,6 +3,7 @@ import  {FormGroup,FormControl,FormBuilder,Validators } from '@angular/forms';
 import {QuizService} from '../quiz.service';
 import {Student} from '../Students';
 import {DataService} from '../data.service';
+import {FirebaseService} from '../firebase.service';
 @Component({
   selector: 'app-forgot-pass',
   templateUrl: './forgot-pass.component.html',
@@ -14,7 +15,7 @@ export class ForgotPassComponent implements OnInit {
   login :boolean;
   liststudent: Student[];
   student: Student;
-  constructor(private fb:FormBuilder,private QuizService:QuizService,private DataService:DataService) { }
+  constructor(private fb:FormBuilder,private QuizService:QuizService,private DataService:DataService,private FireService:FirebaseService) { }
 
   ngOnInit() {
     this.formSignIn = this.fb.group({
@@ -22,14 +23,14 @@ export class ForgotPassComponent implements OnInit {
       email:['',[Validators.required,Validators.email]]
     })
     this.login = false;
-    this.liststudent = this.DataService.ListStudents;
+    console.log(this.FireService.ListStudents);
   }
 onSubmit(){
-  for(let i =0;i<this.liststudent.length;i++)
+  for(let i =0;i<this.FireService.ListStudents.length;i++)
    {
-     if(this.formSignIn.value.username == this.liststudent[i].username && this.formSignIn.value.email == this.liststudent[i].email)
+     if(this.formSignIn.value.username == this.FireService.ListStudents[i].username && this.formSignIn.value.email == this.FireService.ListStudents[i].email)
      {
-       this.student =this.liststudent[i];
+       this.student =this.FireService.ListStudents[i];
      }
    }
    if(this.student.username == this.formSignIn.value.username && this.student.email == this.formSignIn.value.email)
@@ -39,6 +40,7 @@ onSubmit(){
    }
    else{
      alert('Ten tai khoan hoac email ko chinh xac');
+     console.log("dang nhap ko thanh cong")
    }
    
 }

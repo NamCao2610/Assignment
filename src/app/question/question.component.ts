@@ -36,12 +36,13 @@ user:Student;
          console.log(this.index)
          this.pName = this.list[this.index].Name;
       })
+      
     // Lay Tham so Id va name cua home 
     this.pID = this.route.snapshot.paramMap.get('Id');
     console.log(this.pID);
     console.log(this.pName);
     this.isShow = true;
-    this.jsonName = this.pID+'.js';
+    this.jsonName = this.pID+'.json';
     //Lay file Json cua cau hoi
     this.QuizService.getQuiz(this.jsonName).subscribe(data =>{
         this.question = data;
@@ -68,10 +69,7 @@ prepageQuestion()
  }
 }
 //Ham load lai Trang 
-Load()
-{
-  location.reload();
-}
+
 //Ham cham diem
 Mark(right : number)
 {

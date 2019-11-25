@@ -41,7 +41,7 @@
         <article class ="col-lg-9 col-sm-8">
               <div class="card">
                   <div class="card-header">
-                     Dang nhap vao web nha <i class='far fa-hand-point-down'></i>
+                     Đăng nhập vào web nha <i class='far fa-hand-point-down'></i>
                   </div>
                   <div class="card-body" *ngIf="!login">
                     <!--Trang lien he--> 
@@ -56,17 +56,18 @@
                             <input type="password" class="form-control" id="inputPassword4" placeholder="Password" formControlName="password"><br>
                             <p *ngIf="formSignIn.get('password').errors?.required && formSignIn.get('password').touched">Ko dc de trong ki tu</p>
                             <p *ngIf="formSignIn.get('password').errors?.minlength && formSignIn.get('password').touched">Mat khau phai it nhat 6 ki tu</p>
+                            <span class="error"></span>
                         </div>
                         
                         <button [disabled]="formSignIn.invalid" type="submit" class="btn btn-primary">Sign In</button>
                     </form><br>
-                    <p>Vui long dang ki truoc khi dang nhap hehe</p>
-                    <p>Sau khi doi mat khau co the dang nhap lai</p>
-                    <p>Sau khi quen mat khau co the dang nhap lai</p>
+                    <p>Bạn có thể đăng kí trước khi đăng nhập</p>
+                    <p>Sau khi đổi mật khẩu có thể đăng nhập lại</p>
+                    <p>Sau khi lấy lại được mật khẩu có thể đăng nhập lại</p>
                   </div>
           <!--Dang nhap thanh cong-->
                   <div class="card-body" *ngIf="login">
-                    <h3 style="color:green;">Chuc mung ban da dang nhap thanh cong</h3>
+                    <h3 style="color:green;">Chúc mừng bạn đã đăng nhập bạn có thể tham gia thi trắc nghiệm</h3>
                     <button type="submit" class="btn btn-primary" (click)="Login()">Tro ve trang dang nhap</button>
                   </div>
           <!--Phan trang di chuyen cho web-->

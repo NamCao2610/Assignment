@@ -3,6 +3,7 @@ import  {FormGroup,FormControl,FormBuilder,Validators } from '@angular/forms';
 import {QuizService} from '../quiz.service';
 import {Student} from '../Students';
 import {DataService} from '../data.service';
+import {FirebaseService} from '../firebase.service';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -17,7 +18,7 @@ export class SignInComponent implements OnInit {
   student: Student;
   login2: boolean;
 
-  constructor(private fb:FormBuilder,private QuizService:QuizService,private DataService:DataService) { }
+  constructor(private fb:FormBuilder,private QuizService:QuizService,private DataService:DataService,private FireService:FirebaseService) { }
 
   ngOnInit() : void {
    
@@ -26,20 +27,19 @@ export class SignInComponent implements OnInit {
       password:['',[Validators.required,Validators.minLength(6)]]
     })
     this.login = false;
-    this.liststudent = this.DataService.ListStudents;
-    
-    
+    console.log("day la ds22",this.FireService.ListStudents)
+
   }
   onSubmit()
   {
     console.log(this.formSignIn.value);
     //Kiem tra mac dinh
     //Kiem tra sau khi dang ky
-    for(let i=0 ; i< this.liststudent.length ; i++)
+    for(let i=0 ; i< this.FireService.ListStudents.length ; i++)
     {
-    if(this.formSignIn.value.username == this.DataService.ListStudents[i].username && this.formSignIn.value.password==this.DataService.ListStudents[i].password)
+    if(this.formSignIn.value.username == this.FireService.ListStudents[i].username && this.formSignIn.value.password==this.FireService.ListStudents[i].password)
     {
-      this.student = this.DataService.ListStudents[i];
+      this.student = this.FireService.ListStudents[i];
       
     }
     } 
@@ -55,7 +55,7 @@ export class SignInComponent implements OnInit {
       alert('Ten tai khoan hoac mat khau khong chinh xac');
       console.log('Dang nhap ko thanh cong');
     }
-
+    
   }
   Login()
   {

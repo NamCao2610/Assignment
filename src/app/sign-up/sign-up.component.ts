@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {DataService} from '../data.service';
+import {FirebaseService} from '../firebase.service';
 import {Student} from '../Students'
+import { AngularFireDatabase } from '@angular/fire/database';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -22,16 +24,14 @@ export class SignUpComponent implements OnInit {
   login : boolean;
   list: Student;
   ListStudent:Student[];
-  constructor(private DataService : DataService) { }
+  
+  
+  constructor(private DataService : DataService,private db:AngularFireDatabase,private fb:FirebaseService) { }
 
   ngOnInit() {
-    this.DataService.getStudent().subscribe(data =>{
-      this.students = data;
-      this.DataService.ListStudents = this.students;
-      console.log(this.DataService.ListStudents)
-    })
+    console.log("danh sach dang ki",this.fb.ListStudents)
     this.login = false;
-   
+    
   }
   onSubmit(formSignup)
   {
@@ -47,9 +47,10 @@ export class SignUpComponent implements OnInit {
       marks:"0"
     }
     console.log(formSignup.value);
-    this.students.push(this.list)
-    this.DataService.setList(this.students); 
-    console.log('Day la danh sach hs2',this.students);
+    this.DataService.ListStudents.push(this.list)
+    this.fb.ListStudents.push(this.list)
+    this.db.list('/Students').push(this.list);
+    console.log('Day la danh sach hs2',this.fb.ListStudents);
     this.login = !this.login
   }
   getHs()
@@ -60,4 +61,5 @@ export class SignUpComponent implements OnInit {
   {
     this.login =!this.login
   }
+  
 }
